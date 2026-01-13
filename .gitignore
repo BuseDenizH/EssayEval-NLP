@@ -1,0 +1,19 @@
+# Gereksiz Sistem Dosyaları
+__pycache__/
+*.pyc
+.DS_Store
+
+# Frontend Gereksizleri (Çok yer kaplar, otomatik kurulur)
+node_modules/
+dist/
+.env
+
+# Backend Gereksizleri
+venv/
+.env
+
+# 🔥 DİKKAT: Dev Model Dosyaları (GitHub'a sığmaz!)
+backend/models/
+*.bin
+*.safetensors
+*.pth
