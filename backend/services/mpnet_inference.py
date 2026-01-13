@@ -15,7 +15,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # GPU hatası olursa alttakini aç:
 # device = torch.device("cpu")
 
-print(f"🔄 Loading MPNet from: {MODEL_PATH}")
+print(f"[*] Loading MPNet from: {MODEL_PATH}")
 
 tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH), local_files_only=True)
 model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), local_files_only=True)
@@ -23,7 +23,7 @@ model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), loca
 model.to(device)
 model.eval()
 
-print("✅ MPNet loaded successfully.")
+print("[OK] MPNet loaded successfully.")
 
 def run_mpnet_inference(essay: str):
     inputs = tokenizer(
@@ -38,7 +38,7 @@ def run_mpnet_inference(essay: str):
         outputs = model(**inputs)
         logits = outputs.logits.squeeze().tolist()
     
-    print(f"\n📊 RAW OUTPUTS: {logits}")
+    print(f"\n[MPNet] RAW OUTPUTS: {logits}")
 
     # Değişkenleri ayıkla
     tr = cc = lr = gra = 0.0

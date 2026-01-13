@@ -28,7 +28,7 @@ def predict(request: PredictRequest):
     # 1. MPNet
     if "mpnet" in request.models:
         try:
-            print("⏳ Running MPNet...")
+            print("[*] Running MPNet...")
             results["mpnet"] = run_mpnet_inference(text)
         except Exception as e:
             results["mpnet"] = {"error": str(e)}
@@ -36,7 +36,7 @@ def predict(request: PredictRequest):
     # 2. DeBERTa
     if "deberta" in request.models:
         try:
-            print("⏳ Running DeBERTa...")
+            print("[*] Running DeBERTa...")
             results["deberta"] = run_deberta_inference(text)
         except Exception as e:
              results["deberta"] = {"error": str(e)}
@@ -44,11 +44,11 @@ def predict(request: PredictRequest):
     # 3. Longformer (DÜZELTİLEN KISIM)
     if "longformer" in request.models:
         try:
-            print("⏳ Running Longformer...")
+            print("[*] Running Longformer...")
             # Artık 'pass' değil, fonksiyonu çağırıyoruz:
             results["longformer"] = run_inference(text)
         except Exception as e:
-            print(f"❌ Longformer Hatası: {e}")
+            print(f"[ERROR] Longformer Hatasi: {e}")
             results["longformer"] = {"error": str(e)}
 
     return {"results": results}

@@ -15,16 +15,16 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Eğer Longformer çok RAM yerse ve bilgisayar donarsa alttakini aç:
 # device = torch.device("cpu")
 
-print(f"🔄 Loading Longformer from: {MODEL_PATH}")
+print(f"[*] Loading Longformer from: {MODEL_PATH}")
 
 try:
     tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH), local_files_only=True)
     model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), local_files_only=True)
     model.to(device)
     model.eval()
-    print("✅ Longformer loaded successfully.")
+    print("[OK] Longformer loaded successfully.")
 except Exception as e:
-    print(f"❌ Longformer Yükleme Hatası: {e}")
+    print(f"[ERROR] Longformer Yukleme Hatasi: {e}")
     model = None
     tokenizer = None
 
@@ -46,7 +46,7 @@ def run_inference(essay: str):
             logits = outputs.logits.squeeze().tolist()
         
         # Debug için yazdır
-        print(f"\n📊 LONGFORMER RAW OUTPUTS: {logits}")
+        print(f"\n[Longformer] RAW OUTPUTS: {logits}")
 
         # Değişkenleri ayıkla
         tr = cc = lr = gra = 0.0

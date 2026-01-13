@@ -14,16 +14,16 @@ MODEL_PATH = BASE_DIR / "models" / "deberta"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Eğer hata alırsan: device = torch.device("cpu")
 
-print(f"🔄 Loading DeBERTa from: {MODEL_PATH}")
+print(f"[*] Loading DeBERTa from: {MODEL_PATH}")
 
 try:
     tokenizer = AutoTokenizer.from_pretrained(str(MODEL_PATH), local_files_only=True)
     model = AutoModelForSequenceClassification.from_pretrained(str(MODEL_PATH), local_files_only=True)
     model.to(device)
     model.eval()
-    print("✅ DeBERTa loaded successfully.")
+    print("[OK] DeBERTa loaded successfully.")
 except Exception as e:
-    print(f"❌ DeBERTa Yükleme Hatası: {e}")
+    print(f"[ERROR] DeBERTa Yukleme Hatasi: {e}")
     model = None
     tokenizer = None
 
@@ -44,7 +44,7 @@ def run_deberta_inference(essay: str):
         logits = outputs.logits.squeeze().tolist()
     
     # Ham çıktıları görelim (Debug için)
-    print(f"\n📊 DEBERTA RAW OUTPUTS: {logits}")
+    print(f"\n[DeBERTa] RAW OUTPUTS: {logits}")
 
     # Değişkenleri ayıkla
     tr = cc = lr = gra = 0.0
